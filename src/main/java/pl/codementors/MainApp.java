@@ -8,17 +8,17 @@ import java.util.Scanner;
 public class MainApp {
     public static void main(String[] args) {
 
-        final int INITIAL_SIZE = 10;
-
         Scanner inputScanner = new Scanner(System.in);
 
-        Book[] bookArr = new Book[INITIAL_SIZE];
+//        added for future quick tests
+//        Book[] bookArrTest = new Book[INITIAL_SIZE];
+//        bookArrTest[1] = new Book("TestTitle","TestAuthor",1111);
+//        bookArrTest[3] = new Book("Test2Title","Test2Author",2222);
+//        bookArrTest[5] = new Book("Test3Title","Test3Author",3333);
+//        Shelf bookArr = new Shelf(bookArrTest);
 
-        //added books for quick tests
-        bookArr[1] = new Book("TestTitle","TestAuthor",1111);
-        bookArr[3] = new Book("Test2Title","Test2Author",2222);
-        bookArr[5] = new Book("Test3Title","Test3Author",3333);
 
+        Shelf bookArr = new Shelf(10);
 
         boolean runner = true;
         while(runner){
@@ -40,7 +40,7 @@ public class MainApp {
                             + myBook.getAuthor() + "\nRok wydania: "
                             + myBook.getReleaseYear() + "\nPodaj miejsce na półce(od 1 do 10)");
                     //TODO dodaj walidacje
-                    bookArr[inputScanner.nextInt()-1] = myBook;
+                    bookArr.setBook(myBook,inputScanner.nextInt()-1);
                     inputScanner.skip("\n");
                     break;
                 }
@@ -49,11 +49,11 @@ public class MainApp {
                     System.out.println("Z której półki książkę");
                     int index = inputScanner.nextInt();
 
-                    if (bookArr[index-1] == null){
+                    if (bookArr.getBook(index-1) == null){
                         System.out.println("Półka pusta");
                     }
                     else {
-                        bookArr[index-1].printBook();
+                        bookArr.getBook(index-1).printBook();
                     }
 
                     inputScanner.skip("\n");
@@ -62,11 +62,11 @@ public class MainApp {
                 }
                 case "3":{
                     System.out.println("Wypisuje wszystkie książki: \n");
-                    for(int i = 0; i < bookArr.length; i++){
-                        if(bookArr[i] == null){
+                    for(int i = 0; i < bookArr.lenght(); i++){
+                        if(bookArr.getBook(i) == null){
                         }
                         else {
-                            bookArr[i].printBook();
+                            bookArr.getBook(i).printBook();
                         }
                     }
                     break;
@@ -78,23 +78,12 @@ public class MainApp {
                     break;
                 }
 
-
                 default: {
                     System.out.println("Default");
                 }
 
             }
         }
-
-
-
-
-
-
-//        System.out.println("Test:" + bookArr[0].getTitle());
-//        System.out.println("Test:" + bookArr[1].getTitle());
-
-
 
     }
 }

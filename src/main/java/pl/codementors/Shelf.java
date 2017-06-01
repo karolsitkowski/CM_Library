@@ -7,8 +7,11 @@ public class Shelf {
 
     private Book[] books;
 
+    private int shelfSize;
+
     public Shelf(int shelfSize) {
         this.books = new Book[shelfSize];
+        this.shelfSize = shelfSize;
     }
 
     public Shelf(Book[] books) {
@@ -21,6 +24,10 @@ public class Shelf {
 
     public void setBook(Book book,int index){
         this.books[index] = book;
+    }
+
+    public int lenght(){
+        return shelfSize;
     }
 
 
