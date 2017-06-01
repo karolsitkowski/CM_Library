@@ -32,4 +32,23 @@ public class Book {
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
+
+    public Book(String title, String author, int releaseYear) {
+        this.title = title;
+        this.author = author;
+        this.releaseYear = releaseYear;
+    }
+
+    public Book(){
+
+    }
+
+    public void printBook(){
+        System.out.println("Tytuł: " + title);
+        System.out.println("Autor: " + author);
+        System.out.println("Data wydania" + releaseYear);
+        System.out.println("-----------------");
+    }
+
+
 }
