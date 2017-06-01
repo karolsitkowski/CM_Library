@@ -10,15 +10,14 @@ public class MainApp {
 
         Scanner inputScanner = new Scanner(System.in);
 
-//        added for future quick tests
-//        Book[] bookArrTest = new Book[INITIAL_SIZE];
-//        bookArrTest[1] = new Book("TestTitle","TestAuthor",1111);
-//        bookArrTest[3] = new Book("Test2Title","Test2Author",2222);
-//        bookArrTest[5] = new Book("Test3Title","Test3Author",3333);
-//        Shelf bookArr = new Shelf(bookArrTest);
+//
 
 
         Shelf bookArr = new Shelf(10);
+        bookArr.setBook(new Book("TestTitle","TestAuthor",1111),1);
+        bookArr.setBook(new Book("Test2Title","Test2Author",2222),3);
+        bookArr.setBook(new Book("Test3Title","Test3Author",3333),5);
+
 
         boolean runner = true;
         while(runner){
