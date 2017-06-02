@@ -39,11 +39,11 @@ public class Book {
         this.releaseYear = releaseYear;
     }
 
-    public Book(){
+    public Book() {
 
     }
 
-    public void printBook(){
+    public void printBook() {
         System.out.println("Tytuł: " + title);
         System.out.println("Autor: " + author);
         System.out.println("Data wydania: " + releaseYear);

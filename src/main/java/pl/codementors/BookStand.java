@@ -12,18 +12,18 @@ public class BookStand {
         this.bookStand = new Shelf[size];
     }
 
-    public BookStand(){
+    public BookStand() {
     }
 
     public Shelf getShelfFromBookstand(int index) {
         return bookStand[index];
     }
 
-    public void addShelveToBookStand(Shelf shelf,int index) {
+    public void addShelveToBookStand(Shelf shelf, int index) {
         this.bookStand[index] = shelf;
     }
 
-    public int lenght(){
+    public int lenght() {
         return bookStand.length;
     }
 }

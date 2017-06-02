@@ -18,20 +18,17 @@ public class Shelf {
         this.books = books;
     }
 
-    public Book getBook(int index){
+    public Book getBook(int index) {
         return books[index];
     }
 
-    public void setBook(Book book,int index){
+    public void setBook(Book book, int index) {
         this.books[index] = book;
     }
 
-    public int lenght(){
+    public int lenght() {
         return shelfSize;
     }
-
-
-
 
 
 }
