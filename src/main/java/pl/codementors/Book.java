@@ -6,7 +6,9 @@ package pl.codementors;
 public class Book {
 
     private String title;
+
     private String author;
+
     private int releaseYear;
 
     public String getTitle() {
@@ -43,7 +45,8 @@ public class Book {
 
     }
 
-    public void printBook() {
+    public void print() {
+
         System.out.println("Tytuł: " + title);
         System.out.println("Autor: " + author);
         System.out.println("Data wydania: " + releaseYear);

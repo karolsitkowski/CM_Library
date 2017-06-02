@@ -25,9 +25,21 @@ public class Shelf {
     public void setBook(Book book, int index) {
         this.books[index] = book;
     }
-
-    public int lenght() {
+//TODO Remove below
+    public int length() {
         return shelfSize;
+    }
+
+    public void print() {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] == null){
+                //For tests
+                //   System.out.println("PUSTE");
+            }else{
+                books[i].print();
+            }
+
+        }
     }
 
 

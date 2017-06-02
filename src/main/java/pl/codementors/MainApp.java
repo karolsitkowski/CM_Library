@@ -15,12 +15,12 @@ public class MainApp {
         for (int i = 0; i < bookStandArr.length; i++) {
             bookStandArr[i] = new BookStand(10);
             for (int j = 0; j < 10; j++) {
-                bookStandArr[i].addShelveToBookStand(new Shelf(10), j);
+                bookStandArr[i].addShelve(new Shelf(10), j);
             }
         }
 
         //Added books for tests
-        Shelf shelf = bookStandArr[0].getShelfFromBookstand(1);
+        Shelf shelf = bookStandArr[0].getShelf(1);
         shelf.setBook(new Book("TestTitle", "TestAuthor", 1111), 1);
         shelf.setBook(new Book("Test2Title", "Test2Author", 2222), 3);
         shelf.setBook(new Book("Test3Title", "Test3Author", 3333), 5);
@@ -43,12 +43,12 @@ public class MainApp {
                     myBook.setReleaseYear(inputScanner.nextInt());
                     inputScanner.skip("\n");
                     System.out.println("Twoja książka to:");
-                    myBook.printBook();
+                    myBook.print();
                     System.out.println("Podaj rząd regału(od 1 do 10)");
                     int indexOfBookStandArr = inputScanner.nextInt();
                     inputScanner.skip("\n");
                     System.out.println("Podaj miejsce na regale(od 1 do 10)");
-                    bookStandArr[indexOfBookStandArr].addShelveToBookStand(tmpShelf, inputScanner.nextInt());
+                    bookStandArr[indexOfBookStandArr].addShelve(tmpShelf, inputScanner.nextInt());
                     inputScanner.skip("\n");
                     System.out.println("Podaj miejsce na półce(od 1 do 10)");
                     tmpShelf.setBook(myBook, inputScanner.nextInt());
@@ -67,33 +67,27 @@ public class MainApp {
                     int bookIndex = inputScanner.nextInt();
                     inputScanner.skip("\n");
 
-                    if (bookStandArr[bookStandsIndex].getShelfFromBookstand(shelfIndex).getBook(bookIndex) == null) {
+                    if (bookStandArr[bookStandsIndex].getShelf(shelfIndex).getBook(bookIndex) == null) {
                         System.out.println("Rząd: " + bookStandsIndex + "Regał: " + shelfIndex + " Pułka: " + bookIndex + " Półka pusta");
                     } else {
                         System.out.println("Rząd: " + bookStandsIndex + "Regał: " + shelfIndex + " Pułka: " + bookIndex);
-                        bookStandArr[bookStandsIndex].getShelfFromBookstand(shelfIndex).getBook(bookIndex).printBook();
+                        bookStandArr[bookStandsIndex].getShelf(shelfIndex).getBook(bookIndex).print();
+
                     }
                     break;
                 }
                 case "3": {
-                    System.out.println("Wypisuje wszystkie książki: \n");
-                    for (int k = 0; k < bookStandArr.length; k++) {
-                        for (int j = 0; j < bookStandArr[k].lenght(); j++) {
-                            for (int i = 0; i < 10; i++) {
-                                if (bookStandArr[k].getShelfFromBookstand(j).getBook(i) == null) {
-                                    System.out.println("Rząd: " + k + " Regał: " + j + " Pułka: " + i + " TEST---> Puste miejsce");
-                                    System.out.println("------------------");
-                                } else {
-                                    System.out.println("Rząd: " + k + " Regał: " + j + " Pułka: " + i);
-                                    bookStandArr[k].getShelfFromBookstand(j).getBook(i).printBook();
-                                }
-                            }
 
+                    System.out.println("Wypisuje wszystkie książki: \n");
+                    for (int i = 0; i < bookStandArr.length; i++) {
+                        if (bookStandArr[i] == null){
+                            //For tests
+                            //System.out.println("PUSTE MIEJSCE");
+                        }else{
+                            bookStandArr[i].print();
                         }
 
                     }
-
-
                     break;
                 }
 
