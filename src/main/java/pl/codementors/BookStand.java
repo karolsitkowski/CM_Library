@@ -22,4 +22,8 @@ public class BookStand {
     public void addShelveToBookStand(Shelf shelf,int index) {
         this.bookStand[index] = shelf;
     }
+
+    public int lenght(){
+        return bookStand.length;
+    }
 }

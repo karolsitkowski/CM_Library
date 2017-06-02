@@ -9,13 +9,14 @@ public class MainApp {
     public static void main(String[] args) {
 
 
-        Shelf[] bookStand = new Shelf[10];
-        for (int i = 0; i < bookStand.length;i++){
-            bookStand[i] = new Shelf(10);
+        BookStand bookStand = new BookStand(10);
+
+        for (int i = 0; i < bookStand.lenght();i++){
+            bookStand.addShelveToBookStand(new Shelf(10),i);
         }
 
 //Added books for tests
-        Shelf shelf = bookStand[0];
+        Shelf shelf = bookStand.getShelfFromBookstand(1);
         shelf.setBook(new Book("TestTitle","TestAuthor",1111),1);
         shelf.setBook(new Book("Test2Title","Test2Author",2222),3);
         shelf.setBook(new Book("Test3Title","Test3Author",3333),5);
@@ -43,7 +44,7 @@ public class MainApp {
                     tmpShelf.setBook(myBook,inputScanner.nextInt());
                     inputScanner.skip("\n");
                     System.out.println("Podaj miejsce na regale(od 1 do 10)");
-                    bookStand[inputScanner.nextInt()] = tmpShelf;
+                    bookStand.addShelveToBookStand(tmpShelf,inputScanner.nextInt());
                     inputScanner.skip("\n");
                     System.out.println("Dziękujemy książka została dodana");
                     break;
@@ -56,25 +57,25 @@ public class MainApp {
                     int bookIndex = inputScanner.nextInt();
                     inputScanner.skip("\n");
 
-                    if (bookStand[shelfIndex].getBook(bookIndex) == null){
+                    if (bookStand.getShelfFromBookstand(shelfIndex).getBook(bookIndex) == null){
                         System.out.println("Regał: " + shelfIndex + " Pułka: " + bookIndex + " Półka pusta");
                     }
                     else {
                         System.out.println("Regał: " + shelfIndex + " Pułka: " + bookIndex);
-                        bookStand[shelfIndex].getBook(bookIndex).printBook();
+                        bookStand.getShelfFromBookstand(shelfIndex).getBook(bookIndex).printBook();
                     }
                     break;
                 }
                 case "3":{
                     System.out.println("Wypisuje wszystkie książki: \n");
-                    for (int j = 0; j < bookStand.length; j++) {
+                    for (int j = 0; j < bookStand.lenght(); j++) {
                         for (int i = 0; i < shelf.lenght(); i++) {
-                            if (bookStand[j].getBook(i) == null) {
+                            if (bookStand.getShelfFromBookstand(j).getBook(i) == null) {
                                 System.out.println("Regał: " + j + " Pułka: " + i + " TEST---> Puste miejsce");
                                 System.out.println("------------------");
                             } else {
                                 System.out.println("Regał: " + j + " Pułka: " + i);
-                                bookStand[j].getBook(i).printBook();
+                                bookStand.getShelfFromBookstand(j).getBook(i).printBook();
                             }
                         }
 
