@@ -46,7 +46,7 @@ public class Book {
     public void printBook(){
         System.out.println("Tytuł: " + title);
         System.out.println("Autor: " + author);
-        System.out.println("Data wydania" + releaseYear);
+        System.out.println("Data wydania: " + releaseYear);
         System.out.println("-----------------");
     }
 
