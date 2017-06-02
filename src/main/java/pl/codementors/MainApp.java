@@ -9,18 +9,21 @@ import java.util.Scanner;
 public class MainApp {
     public static void main(String[] args) {
 
-        //creating shelfs and bookstands
-        //BookStand[] bookStandArr = new BookStand[10];
-
+        //Added books for tests
         Library library = new Library();
 
-
         //Added books for tests
-//        Shelf shelf = library.getBookStand().getShelf(1);
-//        shelf.addBook(new Book("TestTitle", "TestAuthor", 1111), 1);
-//        shelf.addBook(new Book("Test2Title", "Test2Author", 2222), 3);
-//        shelf.addBook(new Book("Test3Title", "Test3Author", 3333), 5);
+        Book testBook1 = new Book("TestTitle", "TestAuthor", 1111);
+        Book testBook2 = new Book("Test2Title", "Test2Author", 2222);
+        Book testBook3 = new Book("Test3Title", "Test3Author", 3333);
+        library.addBookStand(new BookStand(),0);
+        library.getBookStand(0).addShelf(new Shelf(),0);
+        library.getBookStand(0).getShelf(0).addBook(testBook1,0);
+        library.getBookStand(0).getShelf(0).addBook(testBook2,3);
+        library.getBookStand(0).getShelf(0).addBook(testBook3,5);
 
+
+        
         Scanner inputScanner = new Scanner(System.in);
         boolean runner = true;
         while (runner) {
@@ -93,7 +96,6 @@ public class MainApp {
                         }else{
                             library.getBookStand(i).print();
                         }
-
                     }
                     break;
                 }
