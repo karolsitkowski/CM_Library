@@ -7,28 +7,18 @@ public class Shelf {
 
     private Book[] books;
 
-    private int shelfSize;
-
-    public Shelf(int shelfSize) {
-        this.books = new Book[shelfSize];
-        this.shelfSize = shelfSize;
-    }
-
-    public Shelf(Book[] books) {
-        this.books = books;
+    public Shelf() {
+        this.books = new Book[10];
     }
 
     public Book getBook(int index) {
         return books[index];
     }
 
-    public void setBook(Book book, int index) {
+    public void addBook(Book book, int index) {
         this.books[index] = book;
     }
-//TODO Remove below
-    public int length() {
-        return shelfSize;
-    }
+
 
     public void print() {
         for (int i = 0; i < books.length; i++) {

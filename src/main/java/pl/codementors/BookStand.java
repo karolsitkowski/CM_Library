@@ -5,35 +5,30 @@ package pl.codementors;
  */
 public class BookStand {
 
-    private Shelf[] bookStand;
+    private Shelf[] shelves;
 
-
-    public BookStand(int size) {
-        this.bookStand = new Shelf[size];
-    }
 
     public BookStand() {
+        this.shelves = new Shelf[10];
     }
+
 
     public Shelf getShelf(int index) {
-        return bookStand[index];
+        return shelves[index];
     }
 
-    public void addShelve(Shelf shelf, int index) {
-        this.bookStand[index] = shelf;
+    public void addShelf(Shelf shelf, int index) {
+        this.shelves[index] = shelf;
     }
 
-    public int length() {
-        return bookStand.length;
-    }
 
     public void print(){
-        for(int i = 0; i < bookStand.length;i++){
-            if (bookStand[i] == null){
+        for(int i = 0; i < shelves.length; i++){
+            if (shelves[i] == null){
                 //For tests
                 //   System.out.println("PUSTE");
             }else {
-                bookStand[i].print();
+                shelves[i].print();
             }
 
         }
