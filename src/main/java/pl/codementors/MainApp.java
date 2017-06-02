@@ -2,6 +2,7 @@ package pl.codementors;
 
 import java.util.Scanner;
 
+
 /**
  * Created by sit0 on 01.06.17.
  */
