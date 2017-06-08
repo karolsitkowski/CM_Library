@@ -85,20 +85,35 @@ public class Library {
         }
     }
 
-    public void readFromFile() {
+    public Library readFromFile() {
+        Library library = new Library();
+
         try (FileReader fr = new FileReader("libmem.txt");
              Scanner scanner = new Scanner(fr);) {
 
-//            bookStands[i].addBookStand(new BookStand(),scanner.nextInt());
+            int numberOfBooks = scanner.nextInt();
+            for(int i = 0; i< numberOfBooks;i++){
 
+                int bookStandIndex = scanner.nextInt();
+                int shelfIndex = scanner.nextInt();
+                int bookIndex = scanner.nextInt();
+                scanner.nextLine();
+                Book book = new Book(scanner.nextLine(),scanner.nextLine(),scanner.nextInt());
+                if(library.getBookStand(bookStandIndex) == null){
 
+                    library.addBookStand(new BookStand(),bookStandIndex);
+                }
+                if(library.getBookStand(bookStandIndex).getShelf(shelfIndex) == null){
 
-
+                    library.getBookStand(bookStandIndex).addShelf(new Shelf(),shelfIndex);
+                }
+                library.getBookStand(bookStandIndex).getShelf(shelfIndex).addBook(book,bookIndex);
+            }
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
             ex.printStackTrace();
         }
-
+        return library;
     }
 
 
