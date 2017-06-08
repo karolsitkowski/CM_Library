@@ -1,5 +1,8 @@
 package pl.codementors;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 /**
  * Created by sit0 on 02.06.17.
  */
@@ -26,7 +29,8 @@ public class BookStand {
         for(int i = 0; i < shelves.length; i++){
             if (shelves[i] == null){
                 //For tests
-                //   System.out.println("PUSTE");
+                //System.out.println("Pusty z Bookstand");
+                //System.out.println("-----------------");
             }else {
                 shelves[i].print();
             }
