@@ -11,7 +11,7 @@ public class Book implements Serializable {
 
     private String title;
 
-    private String author;
+    private Author author;
 
     private int releaseYear;
 
@@ -23,11 +23,11 @@ public class Book implements Serializable {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -39,7 +39,7 @@ public class Book implements Serializable {
         this.releaseYear = releaseYear;
     }
 
-    public Book(String title, String author, int releaseYear) {
+    public Book(String title, Author author, int releaseYear) {
         this.title = title;
         this.author = author;
         this.releaseYear = releaseYear;
@@ -52,7 +52,8 @@ public class Book implements Serializable {
     public void print() {
 
         System.out.println("Tytuł: " + title);
-        System.out.println("Autor: " + author);
+        System.out.println("Imię i nazwisko autora: " + author.getName() + " " + author.getSurName());
+        System.out.println("Pseudonim artystyczny: " + author.getStageName());
         System.out.println("Data wydania: " + releaseYear);
         System.out.println("-----------------");
     }

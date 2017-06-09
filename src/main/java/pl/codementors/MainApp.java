@@ -16,7 +16,7 @@ public class MainApp {
 
         Library library = Library.readFromBinaryFile();
 
-        //Library library = new Library();
+//        Library library = new Library();
         //library = library.readFromTxtFile();
 
         Scanner inputScanner = new Scanner(System.in);

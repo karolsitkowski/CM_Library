@@ -1,9 +1,11 @@
 package pl.codementors;
 
+import java.io.Serializable;
+
 /**
  * Created by sit0 on 09.06.17.
  */
-public class Author {
+public class Author implements Serializable {
     private String name;
     private String surName;
     private String stageName;
