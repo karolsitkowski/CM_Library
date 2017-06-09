@@ -23,19 +23,6 @@ public class Library implements Serializable {
         this.bookStands[index] = bookStand;
     }
 
-    public void print(){
-        for(int i = 0; i < bookStands.length;i++){
-            if (bookStands[i] == null){
-                //For tests
-                //System.out.println("Pusta z Liblary");
-                //System.out.println("-----------------");
-            }else {
-                bookStands[i].print();
-            }
-
-        }
-    }
-
     public void saveToTxtFile(){
 
         try(FileWriter fw = new FileWriter("libmem.txt");
@@ -113,27 +100,22 @@ public class Library implements Serializable {
             System.out.print("Błąd odczytu pliku: ");
             System.out.println(ex);
         }
-
         return library;
     }
 
-    public void saveToBinaryFile(Library library){
+    public static void saveToBinaryFile(Library library){
 
         try(FileOutputStream fos = new FileOutputStream("libmem.bin");
             ObjectOutputStream ois = new ObjectOutputStream(fos);){
 
             ois.writeObject(library);
-
         }catch (IOException ex){
             System.out.println("Problem z zapisem binarnym");
             System.out.println(ex);
         }
-
-
-
     }
 
-    public Library readFromBinaryFile(){
+    public static Library readFromBinaryFile(){
         Library library = new Library();
         try(FileInputStream fis = new FileInputStream("libmem.bin");
         ObjectInputStream ois = new ObjectInputStream(fis);){
@@ -144,5 +126,70 @@ public class Library implements Serializable {
             System.out.println(ex);
         }
         return library;
+    }
+
+    public static void addBook(Library library){
+        Book setBook = new Book();
+        Scanner inputScanner = new Scanner(System.in);
+        System.out.println("---Wpisujesz książkę---");
+        System.out.println("Podaj tytuł książki:");
+        setBook.setTitle(inputScanner.nextLine());
+        System.out.println("Podaj autora:");
+        setBook.setAuthor(inputScanner.nextLine());
+        System.out.println("Podaj rok wydania");
+        setBook.setReleaseYear(inputScanner.nextInt());
+        inputScanner.skip("\n");
+        System.out.println("Twoja książka to:");
+        setBook.print();
+
+        System.out.println("Podaj rząd regału(od 1 do 10)");
+        int indexOfBookStand = inputScanner.nextInt();
+        inputScanner.skip("\n");
+        System.out.println("Podaj miejsce na regale(od 1 do 10)");
+        int indexOfShelf = inputScanner.nextInt();
+        inputScanner.skip("\n");
+        System.out.println("Podaj miejsce na półce(od 1 do 10)");
+        int indexOfBook = inputScanner.nextInt();
+        inputScanner.skip("\n");
+
+        if(library.getBookStand(indexOfBookStand) == null){
+            library.addBookStand(new BookStand(),indexOfBookStand);
+        }
+        if(library.getBookStand(indexOfBookStand).getShelf(indexOfShelf) == null){
+            library.getBookStand(indexOfBookStand).addShelf(new Shelf(),indexOfShelf);
+        }
+        library.getBookStand(indexOfBookStand).getShelf(indexOfShelf).addBook(setBook,indexOfBook);
+    }
+
+    public static void printOneBook(Library library){
+
+        Scanner inputScanner = new Scanner(System.in);
+        System.out.println("Podaj rząd regałów");
+        int bookStandsIndex = inputScanner.nextInt();
+        System.out.println("Podaj regał");
+        int shelfIndex = inputScanner.nextInt();
+        System.out.println("Podaj połkę");
+        int bookIndex = inputScanner.nextInt();
+
+        if (library.getBookStand(bookStandsIndex).getShelf(shelfIndex).getBook(bookIndex) == null) {
+            System.out.println("Rząd: " + bookStandsIndex + "Regał: " + shelfIndex + " Pułka: " + bookIndex + " Półka pusta");
+        } else {
+            System.out.println("Rząd: " + bookStandsIndex + "Regał: " + shelfIndex + " Pułka: " + bookIndex);
+            library.getBookStand(bookStandsIndex).getShelf(shelfIndex).getBook(bookIndex).print();
+
+        }
+    }
+
+    public static void print(Library library){
+
+        for(int i = 0; i < 10;i++){
+            if (library.getBookStand(i) == null){
+                //For tests
+                //System.out.println("Pusta z Liblary");
+                //System.out.println("-----------------");
+            }else {
+                library.getBookStand(i).print();
+            }
+        }
     }
 }
