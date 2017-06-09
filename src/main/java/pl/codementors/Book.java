@@ -2,11 +2,12 @@ package pl.codementors;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Created by sit0 on 01.06.17.
  */
-public class Book {
+public class Book implements Serializable {
 
     private String title;
 

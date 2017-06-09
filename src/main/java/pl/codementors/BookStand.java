@@ -2,11 +2,12 @@ package pl.codementors;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Created by sit0 on 02.06.17.
  */
-public class BookStand {
+public class BookStand implements Serializable {
 
     private Shelf[] shelves;
 

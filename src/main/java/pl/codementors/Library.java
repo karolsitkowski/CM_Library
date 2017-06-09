@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Created by sit0 on 02.06.17.
  */
-public class Library {
+public class Library implements Serializable {
 
     private BookStand[] bookStands;
 
@@ -36,7 +36,7 @@ public class Library {
         }
     }
 
-    public void printToFile(){
+    public void saveToTxtFile(){
 
         try(FileWriter fw = new FileWriter("libmem.txt");
             BufferedWriter stream = new BufferedWriter(fw);){
@@ -85,7 +85,7 @@ public class Library {
         }
     }
 
-    public Library readFromFile() {
+    public Library readFromTxtFile() {
         Library library = new Library();
 
         try (FileReader fr = new FileReader("libmem.txt");
@@ -110,11 +110,39 @@ public class Library {
                 library.getBookStand(bookStandIndex).getShelf(shelfIndex).addBook(book,bookIndex);
             }
         } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-            ex.printStackTrace();
+            System.out.print("Błąd odczytu pliku: ");
+            System.out.println(ex);
         }
+
         return library;
     }
 
+    public void saveToBinaryFile(Library library){
 
+        try(FileOutputStream fos = new FileOutputStream("libmem.bin");
+            ObjectOutputStream ois = new ObjectOutputStream(fos);){
+
+            ois.writeObject(library);
+
+        }catch (IOException ex){
+            System.out.println("Problem z zapisem binarnym");
+            System.out.println(ex);
+        }
+
+
+
+    }
+
+    public Library readFromBinaryFile(){
+        Library library = new Library();
+        try(FileInputStream fis = new FileInputStream("libmem.bin");
+        ObjectInputStream ois = new ObjectInputStream(fis);){
+
+            library = (Library) ois.readObject();
+        }catch (IOException | ClassNotFoundException ex){
+            System.out.println("Problem z odczytem binarnym");
+            System.out.println(ex);
+        }
+        return library;
+    }
 }
