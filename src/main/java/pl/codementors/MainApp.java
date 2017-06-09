@@ -14,10 +14,10 @@ public class MainApp {
     public static void main(String[] args) {
 
 
-        //Library library = Library.readFromBinaryFile();
+        Library library = Library.readFromBinaryFile();
 
-        Library library = new Library();
-        library = library.readFromTxtFile();
+        //Library library = new Library();
+        //library = library.readFromTxtFile();
 
         Scanner inputScanner = new Scanner(System.in);
         boolean runner = true;
@@ -51,7 +51,7 @@ public class MainApp {
 
             }
         }
-//        library.saveToTxtFile();
         Library.saveToBinaryFile(library);
+        //        library.saveToTxtFile();
     }
 }
