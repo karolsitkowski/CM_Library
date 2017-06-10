@@ -28,6 +28,10 @@ public class Book implements Serializable {
         return authors;
     }
 
+    public Author getAuthor(int i){
+        return authors[i];
+    }
+
     public void setAuthors(Author[] authors) {
         this.authors = authors;
     }

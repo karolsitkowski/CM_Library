@@ -33,5 +33,10 @@ public class Author implements Serializable {
     public void setStageName(String stageName) {
         this.stageName = stageName;
     }
+
+    public String print(){
+
+        return name + " " + surName + " " + stageName;
+    }
 }
 

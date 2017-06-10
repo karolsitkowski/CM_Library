@@ -17,7 +17,7 @@ public class MainApp {
         Library library = Library.readFromBinaryFile();
 
 //        Library library = new Library();
-        //library = library.readFromTxtFile();
+//       library = library.readFromTxtFile();
 
         Scanner inputScanner = new Scanner(System.in);
         boolean runner = true;
@@ -52,6 +52,6 @@ public class MainApp {
             }
         }
         Library.saveToBinaryFile(library);
-        //        library.saveToTxtFile();
+                library.saveToTxtFile();
     }
 }

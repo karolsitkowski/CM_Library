@@ -23,85 +23,107 @@ public class Library implements Serializable {
         this.bookStands[index] = bookStand;
     }
 
-//    public void saveToTxtFile(){
-//
-//        try(FileWriter fw = new FileWriter("libmem.txt");
-//            BufferedWriter stream = new BufferedWriter(fw);){
-//            int bookCounter = 0;
-//            for (int i = 0; i < 10; i++) {
-//                if (bookStands[i] == null){
-//                }else{
-//                    for (int j = 0; j < 10; j++) {
-//                        if (bookStands[i].getShelf(j) == null) {
-//                        } else {
-//                            for (int k = 0; k < 10; k++) {
-//                                if (bookStands[i].getShelf(j).getBook(k) == null) {
-//                                }
-//                                else {
-//                                    bookCounter++;
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            stream.write(bookCounter + "\n");
-//            for (int i = 0; i < 10; i++) {
-//                if (bookStands[i] == null){
-//                }else{
-//                    for (int j = 0; j < 10; j++) {
-//                        if (bookStands[i].getShelf(j) == null) {
-//                        } else {
-//                            for (int k = 0; k < 10; k++) {
-//                                if (bookStands[i].getShelf(j).getBook(k) == null) {
-//                                }
-//                                else {
-//                                    stream.write("" + i + " " + j + " " + k + "\n");
-//                                    stream.write(bookStands[i].getShelf(j).getBook(k).getTitle() + "\n");
-//                                    stream.write(bookStands[i].getShelf(j).getBook(k).getAuthors() + "\n");
-//                                    stream.write(bookStands[i].getShelf(j).getBook(k).getReleaseYear() + "\n");
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }catch (IOException ex) {
-//            System.err.println(ex.getMessage());
-//            ex.printStackTrace();
-//        }
-//    }
+    public void saveToTxtFile(){
 
-//    public Library readFromTxtFile() {
-//        Library library = new Library();
-//
-//        try (FileReader fr = new FileReader("libmem.txt");
-//             Scanner scanner = new Scanner(fr);) {
-//
-//            int numberOfBooks = scanner.nextInt();
-//            for(int i = 0; i< numberOfBooks;i++){
-//
-//                int bookStandIndex = scanner.nextInt();
-//                int shelfIndex = scanner.nextInt();
-//                int bookIndex = scanner.nextInt();
-//                scanner.nextLine();
-//                Book book = new Book(scanner.nextLine(),scanner.nextLine(),scanner.nextInt());
-//                if(library.getBookStand(bookStandIndex) == null){
-//
-//                    library.addBookStand(new BookStand(),bookStandIndex);
-//                }
-//                if(library.getBookStand(bookStandIndex).getShelf(shelfIndex) == null){
-//
-//                    library.getBookStand(bookStandIndex).addShelf(new Shelf(),shelfIndex);
-//                }
-//                library.getBookStand(bookStandIndex).getShelf(shelfIndex).addBook(book,bookIndex);
-//            }
-//        } catch (IOException ex) {
-//            System.out.print("Błąd odczytu pliku: ");
-//            System.out.println(ex);
-//        }
-//        return library;
-//    }
+        try(FileWriter fw = new FileWriter("libmem.txt");
+            BufferedWriter stream = new BufferedWriter(fw);){
+            int bookCounter = 0;
+            for (int i = 0; i < 10; i++) {
+                if (bookStands[i] == null){
+                }else{
+                    for (int j = 0; j < 10; j++) {
+                        if (bookStands[i].getShelf(j) == null) {
+                        } else {
+                            for (int k = 0; k < 10; k++) {
+                                if (bookStands[i].getShelf(j).getBook(k) == null) {
+                                }
+                                else {
+                                    bookCounter++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            stream.write(bookCounter + "\n");
+            for (int i = 0; i < 10; i++) {
+                if (bookStands[i] == null){
+                }else{
+                    for (int j = 0; j < 10; j++) {
+                        if (bookStands[i].getShelf(j) == null) {
+                        } else {
+                            for (int k = 0; k < 10; k++) {
+                                if (bookStands[i].getShelf(j).getBook(k) == null) {
+                                }
+                                else {
+                                    stream.write("" + i + " " + j + " " + k + "\n");
+                                    stream.write(bookStands[i].getShelf(j).getBook(k).getTitle() + "\n");
+
+                                    int numberOfAuthors = bookStands[i].getShelf(j).getBook(k).getAuthors().length;
+                                    stream.write(numberOfAuthors + " ");
+                                    for (int l = 0 ;l < numberOfAuthors;l++){
+                                        //bookStands[i].getShelf(j).getBook(k).getAuthor(l).print();
+                                        stream.write(bookStands[i].getShelf(j).getBook(k).getAuthor(l).print() + " ");
+                                    }
+
+                                    stream.write("\n" + bookStands[i].getShelf(j).getBook(k).getReleaseYear() + "\n");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public Library readFromTxtFile() {
+        Library library = new Library();
+
+        try (FileReader fr = new FileReader("libmem.txt");
+             Scanner scanner = new Scanner(fr);) {
+
+            int numberOfBooks = scanner.nextInt();
+            for(int i = 0; i< numberOfBooks;i++){
+
+                int bookStandIndex = scanner.nextInt();
+                int shelfIndex = scanner.nextInt();
+                int bookIndex = scanner.nextInt();
+                scanner.nextLine();
+                String title = scanner.nextLine();
+                int numberOfAuthors = scanner.nextInt();
+
+                Author[] authors = new Author[numberOfAuthors];
+
+                for(int j = 0 ; j < numberOfAuthors ; j++){
+                    Author author = new Author();
+                    author.setName(scanner.next());
+                    author.setSurName(scanner.next());
+                    author.setStageName(scanner.next());
+                    authors[j] = author;
+                }
+
+                Book book = new Book(title,authors,scanner.nextInt());
+
+
+                if(library.getBookStand(bookStandIndex) == null){
+
+                    library.addBookStand(new BookStand(),bookStandIndex);
+                }
+                if(library.getBookStand(bookStandIndex).getShelf(shelfIndex) == null){
+
+                    library.getBookStand(bookStandIndex).addShelf(new Shelf(),shelfIndex);
+                }
+                library.getBookStand(bookStandIndex).getShelf(shelfIndex).addBook(book,bookIndex);
+            }
+        } catch (IOException ex) {
+            System.out.print("Błąd odczytu pliku: ");
+            System.out.println(ex);
+        }
+        return library;
+    }
 
     public static void saveToBinaryFile(Library library){
 
@@ -147,6 +169,10 @@ public class Library implements Serializable {
             author.setStageName(inputScanner.next());
             authors[i] = author;
 //TODO czemu nie działa kod poniżej
+//            book.getAuthor(i).setName(inputScanner.next());
+//            book.getAuthor(i).setSurName(inputScanner.next());
+//            book.getAuthor(i).setStageName(inputScanner.next());
+//            lub
 //            book.getAuthors()[i].setName(inputScanner.next());
 //            book.getAuthors()[i].setSurName(inputScanner.next());
 //            book.getAuthors()[i].setStageName(inputScanner.next());
