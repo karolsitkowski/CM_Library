@@ -1,7 +1,5 @@
 package pl.codementors;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -11,7 +9,10 @@ public class Book implements Serializable {
 
     private String title;
 
-    private Author author;
+    private Author[] authors;
+
+//    TODO potrzebe do kodu ktory sie nie wykonuje
+//    private Author[] authors = new Author[10];
 
     private int releaseYear;
 
@@ -23,12 +24,12 @@ public class Book implements Serializable {
         this.title = title;
     }
 
-    public Author getAuthor() {
-        return author;
+    public Author[] getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setAuthors(Author[] authors) {
+        this.authors = authors;
     }
 
     public int getReleaseYear() {
@@ -39,10 +40,14 @@ public class Book implements Serializable {
         this.releaseYear = releaseYear;
     }
 
-    public Book(String title, Author author, int releaseYear) {
+    public Book(String title, Author[] authors, int releaseYear) {
         this.title = title;
-        this.author = author;
+        this.authors = authors;
         this.releaseYear = releaseYear;
+    }
+
+    public Book(int index) {
+        this.authors = new Author[index];
     }
 
     public Book() {
@@ -52,8 +57,11 @@ public class Book implements Serializable {
     public void print() {
 
         System.out.println("Tytuł: " + title);
-        System.out.println("Imię i nazwisko autora: " + author.getName() + " " + author.getSurName());
-        System.out.println("Pseudonim artystyczny: " + author.getStageName());
+        System.out.println("Autorzy:");
+        for (int i = 0; i < authors.length; i++) {
+            System.out.println("Imię i nazwisko autora " + (i + 1) + ": " + authors[i].getName() + " " + authors[i].getSurName());
+            System.out.println("Pseudonim artystyczny: " + authors[i].getStageName());
+        }
         System.out.println("Data wydania: " + releaseYear);
         System.out.println("-----------------");
     }

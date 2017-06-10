@@ -58,7 +58,7 @@ public class Library implements Serializable {
 //                                else {
 //                                    stream.write("" + i + " " + j + " " + k + "\n");
 //                                    stream.write(bookStands[i].getShelf(j).getBook(k).getTitle() + "\n");
-//                                    stream.write(bookStands[i].getShelf(j).getBook(k).getAuthor() + "\n");
+//                                    stream.write(bookStands[i].getShelf(j).getBook(k).getAuthors() + "\n");
 //                                    stream.write(bookStands[i].getShelf(j).getBook(k).getReleaseYear() + "\n");
 //                                }
 //                            }
@@ -129,17 +129,30 @@ public class Library implements Serializable {
     }
 
     public static void addBook(Library library){
-        Book book = new Book();
-        Author author = new Author();
+
         Scanner inputScanner = new Scanner(System.in);
+        Book book = new Book();
         System.out.println("---Wpisujesz książkę---");
         System.out.println("Podaj tytuł książki:");
-        book.setTitle(inputScanner.nextLine());
-        System.out.println("Podaj imię, nazwisko oraz pseudonim autora (oddzelając spacją):");
-        author.setName(inputScanner.next());
-        author.setSurName(inputScanner.next());
-        author.setStageName(inputScanner.next());
-        book.setAuthor(author);
+        String title = inputScanner.nextLine();
+        System.out.println("Ilu autorów ma książka?");
+        int authorCounter = inputScanner.nextInt();
+
+        Author[] authors = new Author[authorCounter];
+        for(int i = 0; i<authorCounter;i++){
+            System.out.println("Podaj imię, nazwisko oraz pseudonim autora " + (i + 1) + " (oddzelając spacją):");
+            Author author = new Author();
+            author.setName(inputScanner.next());
+            author.setSurName(inputScanner.next());
+            author.setStageName(inputScanner.next());
+            authors[i] = author;
+//TODO czemu nie działa kod poniżej
+//            book.getAuthors()[i].setName(inputScanner.next());
+//            book.getAuthors()[i].setSurName(inputScanner.next());
+//            book.getAuthors()[i].setStageName(inputScanner.next());
+        }
+        book.setTitle(title);
+        book.setAuthors(authors);
         System.out.println("Podaj rok wydania");
         book.setReleaseYear(inputScanner.nextInt());
         inputScanner.skip("\n");
