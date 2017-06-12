@@ -52,6 +52,6 @@ public class MainApp {
             }
         }
         Library.saveToBinaryFile(library);
-                library.saveToTxtFile();
+        library.saveToTxtFile();
     }
 }

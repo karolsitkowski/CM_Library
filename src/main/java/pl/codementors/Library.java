@@ -168,14 +168,6 @@ public class Library implements Serializable {
             author.setSurName(inputScanner.next());
             author.setStageName(inputScanner.next());
             authors[i] = author;
-//TODO czemu nie działa kod poniżej
-//            book.getAuthor(i).setName(inputScanner.next());
-//            book.getAuthor(i).setSurName(inputScanner.next());
-//            book.getAuthor(i).setStageName(inputScanner.next());
-//            lub
-//            book.getAuthors()[i].setName(inputScanner.next());
-//            book.getAuthors()[i].setSurName(inputScanner.next());
-//            book.getAuthors()[i].setStageName(inputScanner.next());
         }
         book.setTitle(title);
         book.setAuthors(authors);

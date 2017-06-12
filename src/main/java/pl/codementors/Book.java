@@ -11,9 +11,6 @@ public class Book implements Serializable {
 
     private Author[] authors;
 
-//    TODO potrzebe do kodu ktory sie nie wykonuje
-//    private Author[] authors = new Author[10];
-
     private int releaseYear;
 
     public String getTitle() {
