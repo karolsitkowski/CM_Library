@@ -12,6 +12,7 @@ public class Book implements Serializable {
     private Author[] authors;
 
     private int releaseYear;
+    //TODO zaslonic klasom dziedziczącym
 
     public String getTitle() {
         return title;

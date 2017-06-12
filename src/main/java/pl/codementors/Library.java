@@ -153,11 +153,41 @@ public class Library implements Serializable {
     public static void addBook(Library library){
 
         Scanner inputScanner = new Scanner(System.in);
-        Book book = new Book();
-        System.out.println("---Wpisujesz książkę---");
-        System.out.println("Podaj tytuł książki:");
+        System.out.println("Co chcesz dodać?\n" +
+                "Wpisz 1 ->Książkę\n" +
+                "Wpisz 2 -> Komiks\n" +
+                "Wpisz 3 -> Czasopismo");
+
+        String choice = inputScanner.nextLine();
+        Book book = null;
+        boolean runner = true;
+        while (runner){
+            if ("1".equals(choice)){
+                book = new Book();
+                runner = false;
+                System.out.println("Wybrałeś książkę");
+            }
+            else if("2".equals(choice)){
+                book = new ComicBook();
+                runner = false;
+                System.out.println("Wybrałeś komiks");
+            }
+            else if("3".equals(choice)){
+                book = new Magazine();
+                runner = false;
+                System.out.println("Wybrałeś magazyn");
+            }
+            else {
+                System.out.println("Zły wybór:\n" +
+                        "Wpisz 1 ->Książkę\n" +
+                        "Wpisz 2 -> Komiks\n" +
+                        "Wpisz 3 -> Czasopismo");
+            }
+        }
+
+        System.out.println("Podaj tytuł:");
         String title = inputScanner.nextLine();
-        System.out.println("Ilu autorów ma książka?");
+        System.out.println("Ilu ma autorów?");
         int authorCounter = inputScanner.nextInt();
 
         Author[] authors = new Author[authorCounter];
@@ -171,11 +201,27 @@ public class Library implements Serializable {
         }
         book.setTitle(title);
         book.setAuthors(authors);
-        System.out.println("Podaj rok wydania");
-        book.setReleaseYear(inputScanner.nextInt());
-        inputScanner.skip("\n");
-        System.out.println("Twoja książka to:");
-        book.print();
+
+        if ("1".equals(choice)){
+            System.out.println("Podaj rok wydania");
+            book.setReleaseYear(inputScanner.nextInt());
+            inputScanner.skip("\n");
+        }
+        else if("2".equals(choice)){
+            System.out.println("Podaj rok wydania w formacie yyyy-MM");
+            String date = ();
+            ((ComicBook)book).setReleaseDate(inputScanner.nextLine());
+            System.out.println("Podaj serię wydawniczą");
+            ((ComicBook)book).setPublishingSeries(inputScanner.nextLine());
+        }
+        else if("3".equals(choice)){
+            System.out.println("Podaj rok wydania");
+            ((Magazine)book).setReleaseYear(inputScanner.nextLine());
+        }
+
+
+        //System.out.println("Twoja książka to:");
+        //book.print();
 
         System.out.println("Podaj rząd regału(od 1 do 10)");
         int indexOfBookStand = inputScanner.nextInt();
