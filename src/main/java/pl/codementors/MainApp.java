@@ -22,9 +22,9 @@ public class MainApp {
         Scanner inputScanner = new Scanner(System.in);
         boolean runner = true;
         while (runner) {
-            System.out.println("MENU:\nWpisz 1 -> Dodaj Ksiązkę\n" +
-                    "Wpisz 2 -> Wypisz wybraną książkę\n" +
-                    "Wpisz 3 -> Wypisz wszystkie książki\n" +
+            System.out.println("MENU:\nWpisz 1 -> Dodaj pozycję do biblioteki\n" +
+                    "Wpisz 2 -> Wypisz wybraną pozycję z biblioteki\n" +
+                    "Wpisz 3 -> Wypisz całą bibliotekę\n" +
                     "Wpisz 0 -> Wyjdz z programu\nWpisz numer operacji");
 
             switch (inputScanner.nextLine()) {

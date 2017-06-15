@@ -58,6 +58,7 @@ public class Book implements Serializable {
 
     public void print() {
 
+        System.out.println("Typ: " + getClass().getSimpleName());
         System.out.println("Tytuł: " + title);
         System.out.println("Autorzy:");
         for (int i = 0; i < authors.length; i++) {

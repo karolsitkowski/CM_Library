@@ -154,7 +154,7 @@ public class Library implements Serializable {
 
         Scanner inputScanner = new Scanner(System.in);
         System.out.println("Co chcesz dodać?\n" +
-                "Wpisz 1 ->Książkę\n" +
+                "Wpisz 1 -> Książkę\n" +
                 "Wpisz 2 -> Komiks\n" +
                 "Wpisz 3 -> Czasopismo");
 
@@ -179,7 +179,7 @@ public class Library implements Serializable {
             }
             else {
                 System.out.println("Zły wybór:\n" +
-                        "Wpisz 1 ->Książkę\n" +
+                        "Wpisz 1 -> Książkę\n" +
                         "Wpisz 2 -> Komiks\n" +
                         "Wpisz 3 -> Czasopismo");
             }
@@ -199,23 +199,24 @@ public class Library implements Serializable {
             author.setStageName(inputScanner.next());
             authors[i] = author;
         }
+
         book.setTitle(title);
         book.setAuthors(authors);
-
+        inputScanner.skip("\n");
         if ("1".equals(choice)){
-            System.out.println("Podaj rok wydania");
+            System.out.println("Podaj rok wydania w formacie ");
             book.setReleaseYear(inputScanner.nextInt());
-            inputScanner.skip("\n");
+
         }
         else if("2".equals(choice)){
             System.out.println("Podaj rok wydania w formacie yyyy-MM");
-            String date = ();
+            //String date = inputScanner.nextLine();
             ((ComicBook)book).setReleaseDate(inputScanner.nextLine());
             System.out.println("Podaj serię wydawniczą");
             ((ComicBook)book).setPublishingSeries(inputScanner.nextLine());
         }
         else if("3".equals(choice)){
-            System.out.println("Podaj rok wydania");
+            System.out.println("Podaj rok wydania w formacie yyyy-MM-dd");
             ((Magazine)book).setReleaseYear(inputScanner.nextLine());
         }
 
@@ -266,7 +267,7 @@ public class Library implements Serializable {
     }
 
     public static void print(Library library){
-        System.out.println("Wypisuje książki: \n");
+        System.out.println("Wypisuje bibliotekę: \n");
         for(int i = 0; i < 10;i++){
             if (library.getBookStand(i) == null){
                 //For tests
