@@ -7,16 +7,26 @@ import java.io.Serializable;
  */
 public class Book implements Serializable {
 
+    public enum Cover {
+        HARD,
+        SOFT,
+        INTEGRATED;
+    }
+
     private String title;
 
     private Author[] authors;
 
     private int releaseYear;
 
-    public enum Cover {
-        HARD,
-        SOFT,
-        INTEGRATED;
+    private Cover cover;
+
+    public Cover getCover() {
+        return cover;
+    }
+
+    public void setCover(Cover cover) {
+        this.cover = cover;
     }
 
     public String getTitle() {
@@ -71,6 +81,7 @@ public class Book implements Serializable {
             System.out.println("Pseudonim artystyczny: " + authors[i].getStageName());
         }
         System.out.println("Data wydania: " + releaseYear);
+        System.out.println("Okładka: " + cover.toString());
         System.out.println("-----------------");
     }
 }

@@ -206,7 +206,7 @@ public class Library implements Serializable {
         if ("1".equals(choice)){
             System.out.println("Podaj rok wydania w formacie ");
             book.setReleaseYear(inputScanner.nextInt());
-
+            inputScanner.skip("\n");
         }
         else if("2".equals(choice)){
             System.out.println("Podaj rok wydania w formacie yyyy-MM");
@@ -219,6 +219,36 @@ public class Library implements Serializable {
             System.out.println("Podaj rok wydania w formacie yyyy-MM-dd");
             ((Magazine)book).setReleaseYear(inputScanner.nextLine());
         }
+
+        System.out.println("Podaj oprawę HARD, SOFT, INTEGRATED");
+        boolean coverRunner = true;
+        while (coverRunner == true){
+            String coverSwitch = inputScanner.nextLine();
+            //
+            switch (coverSwitch) {
+                case "HARD": {
+                    book.setCover(Book.Cover.HARD);
+                    coverRunner = false;
+                    break;
+                }
+
+                case "SOFT": {
+                    book.setCover(Book.Cover.SOFT);
+                    coverRunner = false;
+                    break;
+                }
+
+                case "INTEGRATED": {
+                    book.setCover(Book.Cover.INTEGRATED);
+                    coverRunner = false;
+                    break;
+                }
+
+                default:
+                    System.out.println("Podaj poprawną oprawę HARD, SOFT, INTEGRATED");
+            }
+        }
+
 
 
         //System.out.println("Twoja książka to:");

@@ -27,6 +27,7 @@ public class Magazine extends Book {
             System.out.println("Pseudonim artystyczny: " + getAuthors()[i].getStageName());
         }
         System.out.println("Data wydania: " + releaseDate);
+        System.out.println("Okładka: " + getCover().toString());
         System.out.println("-----------------");
     }
 }

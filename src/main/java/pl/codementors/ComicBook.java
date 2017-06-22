@@ -37,6 +37,8 @@ public class ComicBook extends Book {
         }
         System.out.println("Data wydania: " + releaseDate);
         System.out.println("Wydawnictwo: " + publishingSeries);
+        System.out.println("Okładka: " + getCover().toString());
         System.out.println("-----------------");
+
     }
 }
