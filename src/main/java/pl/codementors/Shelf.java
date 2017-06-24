@@ -11,8 +11,12 @@ public class Shelf implements Serializable {
 
     private Book[] books;
 
-    public Shelf() {
-        this.books = new Book[10];
+    public Shelf(int size) {
+        this.books = new Book[size];
+    }
+
+    public Book[] getBooks() {
+        return books;
     }
 
     public Book getBook(int index) {
@@ -21,6 +25,10 @@ public class Shelf implements Serializable {
 
     public void addBook(Book book, int index) {
         this.books[index] = book;
+    }
+
+    public void setBooks(Book[] books){
+        this.books = books;
     }
 
 

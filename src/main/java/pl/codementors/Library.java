@@ -1,6 +1,7 @@
 package pl.codementors;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -11,8 +12,13 @@ public class Library implements Serializable {
     private BookStand[] bookStands;
 
 
-    public Library() {
-        this.bookStands = new BookStand[10];
+
+    public Library(int size) {
+        this.bookStands = new BookStand[size];
+    }
+
+    public BookStand[] getBookStands() {
+        return bookStands;
     }
 
     public BookStand getBookStand(int index) {
@@ -79,51 +85,51 @@ public class Library implements Serializable {
         }
     }
 
-    public Library readFromTxtFile() {
-        Library library = new Library();
-
-        try (FileReader fr = new FileReader("libmem.txt");
-             Scanner scanner = new Scanner(fr);) {
-
-            int numberOfBooks = scanner.nextInt();
-            for(int i = 0; i< numberOfBooks;i++){
-
-                int bookStandIndex = scanner.nextInt();
-                int shelfIndex = scanner.nextInt();
-                int bookIndex = scanner.nextInt();
-                scanner.nextLine();
-                String title = scanner.nextLine();
-                int numberOfAuthors = scanner.nextInt();
-
-                Author[] authors = new Author[numberOfAuthors];
-
-                for(int j = 0 ; j < numberOfAuthors ; j++){
-                    Author author = new Author();
-                    author.setName(scanner.next());
-                    author.setSurName(scanner.next());
-                    author.setStageName(scanner.next());
-                    authors[j] = author;
-                }
-
-                Book book = new Book(title,authors,scanner.nextInt());
-
-
-                if(library.getBookStand(bookStandIndex) == null){
-
-                    library.addBookStand(new BookStand(),bookStandIndex);
-                }
-                if(library.getBookStand(bookStandIndex).getShelf(shelfIndex) == null){
-
-                    library.getBookStand(bookStandIndex).addShelf(new Shelf(),shelfIndex);
-                }
-                library.getBookStand(bookStandIndex).getShelf(shelfIndex).addBook(book,bookIndex);
-            }
-        } catch (IOException ex) {
-            System.out.print("Błąd odczytu pliku: ");
-            System.out.println(ex);
-        }
-        return library;
-    }
+//    public Library readFromTxtFile() {
+//        Library library = new Library();
+//
+//        try (FileReader fr = new FileReader("libmem.txt");
+//             Scanner scanner = new Scanner(fr);) {
+//
+//            int numberOfBooks = scanner.nextInt();
+//            for(int i = 0; i< numberOfBooks;i++){
+//
+//                int bookStandIndex = scanner.nextInt();
+//                int shelfIndex = scanner.nextInt();
+//                int bookIndex = scanner.nextInt();
+//                scanner.nextLine();
+//                String title = scanner.nextLine();
+//                int numberOfAuthors = scanner.nextInt();
+//
+//                Author[] authors = new Author[numberOfAuthors];
+//
+//                for(int j = 0 ; j < numberOfAuthors ; j++){
+//                    Author author = new Author();
+//                    author.setName(scanner.next());
+//                    author.setSurName(scanner.next());
+//                    author.setStageName(scanner.next());
+//                    authors[j] = author;
+//                }
+//
+//                Book book = new Book(title,authors,scanner.nextInt());
+//
+//
+//                if(library.getBookStand(bookStandIndex) == null){
+//
+//                    library.addBookStand(new BookStand(bookStandIndex),bookStandIndex);
+//                }
+//                if(library.getBookStand(bookStandIndex).getShelf(shelfIndex) == null){
+//
+//                    library.getBookStand(bookStandIndex).addShelf(new Shelf(shelfIndex),shelfIndex);
+//                }
+//                library.getBookStand(bookStandIndex).getShelf(shelfIndex).addBook(book,bookIndex);
+//            }
+//        } catch (IOException ex) {
+//            System.out.print("Błąd odczytu pliku: ");
+//            System.out.println(ex);
+//        }
+//        return library;
+//    }
 
     public static void saveToBinaryFile(Library library){
 
@@ -138,12 +144,13 @@ public class Library implements Serializable {
     }
 
     public static Library readFromBinaryFile(){
-        Library library = new Library();
+        Library library;
         try(FileInputStream fis = new FileInputStream("libmem.bin");
         ObjectInputStream ois = new ObjectInputStream(fis);){
 
             library = (Library) ois.readObject();
         }catch (IOException | ClassNotFoundException ex){
+            library = new Library(1);
             System.out.println("Problem z odczytem binarnym");
             System.out.println(ex);
         }
@@ -210,21 +217,20 @@ public class Library implements Serializable {
         }
         else if("2".equals(choice)){
             System.out.println("Podaj rok wydania w formacie yyyy-MM");
-            //String date = inputScanner.nextLine();
             ((ComicBook)book).setReleaseDate(inputScanner.nextLine());
             System.out.println("Podaj serię wydawniczą");
             ((ComicBook)book).setPublishingSeries(inputScanner.nextLine());
         }
         else if("3".equals(choice)){
             System.out.println("Podaj rok wydania w formacie yyyy-MM-dd");
-            ((Magazine)book).setReleaseYear(inputScanner.nextLine());
+            ((Magazine)book).setReleaseDate(inputScanner.nextLine());
         }
 
         System.out.println("Podaj oprawę HARD, SOFT, INTEGRATED");
         boolean coverRunner = true;
         while (coverRunner == true){
             String coverSwitch = inputScanner.nextLine();
-            //
+
             switch (coverSwitch) {
                 case "HARD": {
                     book.setCover(Book.Cover.HARD);
@@ -249,28 +255,45 @@ public class Library implements Serializable {
             }
         }
 
-
-
-        //System.out.println("Twoja książka to:");
-        //book.print();
-
-        System.out.println("Podaj rząd regału(od 1 do 10)");
+        System.out.println("Podaj rząd regału");
         int indexOfBookStand = inputScanner.nextInt();
         inputScanner.skip("\n");
-        System.out.println("Podaj miejsce na regale(od 1 do 10)");
+        System.out.println("Podaj miejsce na regale");
         int indexOfShelf = inputScanner.nextInt();
         inputScanner.skip("\n");
-        System.out.println("Podaj miejsce na półce(od 1 do 10)");
+        System.out.println("Podaj miejsce na półce");
         int indexOfBook = inputScanner.nextInt();
         inputScanner.skip("\n");
 
-        if(library.getBookStand(indexOfBookStand) == null){
-            library.addBookStand(new BookStand(),indexOfBookStand);
+
+        if (library.getBookStands().length < indexOfBookStand){
+            library.bookStands = Arrays.copyOf(library.getBookStands(),
+                    indexOfBookStand + 1);
         }
+        if(library.getBookStand(indexOfBookStand) == null) {
+            library.addBookStand(new BookStand(indexOfShelf + 1), indexOfBookStand);
+        }
+
+        if(library.getBookStand(indexOfBookStand).getShelves().length < indexOfShelf) {
+            Shelf[] temp = library.getBookStand(indexOfBookStand).getShelves();
+            temp = Arrays.copyOf(temp, indexOfShelf + 1);
+            library.getBookStand(indexOfBookStand).setShelves(temp);
+        }
+
         if(library.getBookStand(indexOfBookStand).getShelf(indexOfShelf) == null){
-            library.getBookStand(indexOfBookStand).addShelf(new Shelf(),indexOfShelf);
+            library.getBookStand(indexOfBookStand).addShelf(new Shelf(indexOfBook + 1),indexOfShelf);
+            System.out.println(library.getBookStand(indexOfBookStand).getShelf(indexOfShelf).getBooks().length);
         }
+
+        if(library.getBookStand(indexOfBookStand).getShelf(indexOfShelf).getBooks().length < indexOfBook){
+            Book[] temp = library.getBookStand(indexOfBookStand).getShelf(indexOfShelf).getBooks();
+            temp = Arrays.copyOf(temp, indexOfBook + 1);
+            library.getBookStand(indexOfBookStand).getShelf(indexOfShelf).setBooks(temp);
+        }
+
         library.getBookStand(indexOfBookStand).getShelf(indexOfShelf).addBook(book,indexOfBook);
+
+
     }
 
     public static void printOneBook(Library library){
@@ -298,14 +321,14 @@ public class Library implements Serializable {
 
     public static void print(Library library){
         System.out.println("Wypisuje bibliotekę: \n");
-        for(int i = 0; i < 10;i++){
+        for(int i = 0; i < library.bookStands.length;i++){
             if (library.getBookStand(i) == null){
-                //For tests
-                //System.out.println("Pusta z Liblary");
-                //System.out.println("-----------------");
+
             }else {
                 library.getBookStand(i).print();
             }
         }
     }
+
+
 }

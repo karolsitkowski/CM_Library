@@ -12,13 +12,21 @@ public class BookStand implements Serializable {
     private Shelf[] shelves;
 
 
-    public BookStand() {
-        this.shelves = new Shelf[10];
+    public BookStand(int size) {
+        this.shelves = new Shelf[size];
     }
 
 
     public Shelf getShelf(int index) {
         return shelves[index];
+    }
+
+    public Shelf[] getShelves() {
+        return shelves;
+    }
+
+    public void setShelves(Shelf[] shelves) {
+        this.shelves = shelves;
     }
 
     public void addShelf(Shelf shelf, int index) {

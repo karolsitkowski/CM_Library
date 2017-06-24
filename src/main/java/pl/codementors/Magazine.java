@@ -12,7 +12,7 @@ public class Magazine extends Book {
         return releaseDate;
     }
 
-    public void setReleaseYear(String releaseYear) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
