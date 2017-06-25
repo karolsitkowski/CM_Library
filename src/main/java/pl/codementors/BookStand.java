@@ -3,45 +3,47 @@ package pl.codementors;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sit0 on 02.06.17.
  */
 public class BookStand implements Serializable {
 
-    private Shelf[] shelves;
+    private List<Shelf> shelves;
 
 
-    public BookStand(int size) {
-        this.shelves = new Shelf[size];
+    public BookStand() {
+        this.shelves = new ArrayList<>();
     }
 
 
     public Shelf getShelf(int index) {
-        return shelves[index];
+        return shelves.get(index);
     }
 
-    public Shelf[] getShelves() {
+    public List<Shelf> getShelves() {
         return shelves;
     }
 
-    public void setShelves(Shelf[] shelves) {
+    public void setShelves(List<Shelf> shelves) {
         this.shelves = shelves;
     }
 
     public void addShelf(Shelf shelf, int index) {
-        this.shelves[index] = shelf;
+        this.shelves.add(index,shelf);
     }
 
 
     public void print(){
-        for(int i = 0; i < shelves.length; i++){
-            if (shelves[i] == null){
+        for(int i = 0; i < shelves.size(); i++){
+            if (shelves.get(i) == null){
                 //For tests
                 //System.out.println("Pusty z Bookstand");
                 //System.out.println("-----------------");
             }else {
-                shelves[i].print();
+                shelves.get(i).print();
             }
 
         }

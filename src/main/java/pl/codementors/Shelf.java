@@ -3,43 +3,45 @@ package pl.codementors;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sit0 on 01.06.17.
  */
 public class Shelf implements Serializable {
 
-    private Book[] books;
+    private List<Book> books;
 
-    public Shelf(int size) {
-        this.books = new Book[size];
+    public Shelf() {
+        this.books = new ArrayList<>();
     }
 
-    public Book[] getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
     public Book getBook(int index) {
-        return books[index];
+        return books.get(index);
     }
 
     public void addBook(Book book, int index) {
-        this.books[index] = book;
+        this.books.add(index,book);
     }
 
-    public void setBooks(Book[] books){
+    public void setBooks(List<Book> books){
         this.books = books;
     }
 
 
     public void print() {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i] == null) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i) == null) {
                 //For tests
                 //System.out.println("Pusty z Shelf");
                 //System.out.println("-----------------");
             } else {
-                books[i].print();
+                books.get(i).print();
             }
         }
     }
